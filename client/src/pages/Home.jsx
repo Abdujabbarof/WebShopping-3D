@@ -4,11 +4,13 @@ import { useSnapshot } from 'valtio'
 
 import state from '../store'
 
+import { getContrastingColor } from '../config/helpers'
 import { headContainerAnimation, headTextAnimation, headContentAnimation, slideAnimation } from '../config/motion'
 import { CustomButton } from '../components'
 
 const Home = () => {
   const snap = useSnapshot(state)
+  const contrastColor = getContrastingColor(snap.color)
 
   return (
     <AnimatePresence>
@@ -20,10 +22,10 @@ const Home = () => {
 
           <motion.div { ...headContainerAnimation }>
             <motion.div { ...headTextAnimation }>
-              <h1 className='head-text'>LET&apos;S <br className='xl:block hidden' /> DO IT</h1>
+              <h1 className='head-text xl:mt-[8rem]'>LET&apos;S <br className='xl:block hidden' /> DO IT</h1>
             </motion.div>
             <motion.div { ...headContentAnimation }>
-              <p className='max-w-md font-normal text-gray-600'>Create your unique and exclusive shirt with our brand-new 3D customization tool. <strong>Unleash your imagination</strong> {" "} and define your own style</p>
+              <p className={`max-w-md font-normal text-${contrastColor}`}>Create your unique and exclusive shirt with our brand-new 3D customization tool. <strong>Unleash your imagination</strong> {" "} and define your own style</p>
 
               <CustomButton title='Customize It' type='filled' handleClick={() => state.intro = false} customStyle='w-fit mt-5 px-4 py-2.5 font-bold text-sm' />
             </motion.div>
